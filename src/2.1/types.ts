@@ -212,7 +212,21 @@ export type IntrusionSet = BaseStixDomainObject<"intrusion-set">;
 
 export type Location = BaseStixDomainObject<"location">;
 
-export type Malware = BaseStixDomainObject<"malware">;
+export type Malware = BaseStixDomainObject<"malware"> & {
+    name?: string;
+    description?: string;
+    malware_types?: MalwareTypeOv[];
+    is_family?: boolean;
+    aliases?: string[];
+    kill_chain_phases?: KillChainPhase[];
+    first_seen?: Timestamp;
+    last_seen?: Timestamp;
+    operating_system_refs?: Identifier<"software">[];
+    architecture_execution_envs?: ProcessorArchitectureOv[];
+    implementation_languages?: ImplementationLanguageOv[];
+    capabilities?: MalwareCapabilityOv[];
+    sample_refs?: Identifier<"file">[] | Identifier<"artifact">[];
+}
 
 export type MalwareAnalysis = BaseStixDomainObject<"malware-analysis">;
 
@@ -448,6 +462,15 @@ export type IndicatorTypeOv = OpenVocabulary<
 >;
 
 export type PatternTypeOv = OpenVocabulary<"stix" | "pcre" | "sigma" | "snort" | "suricata" | "yara">;
+
+export type MalwareTypeOv = OpenVocabulary<"adware" | "backdoor" | "bot" | "bootkit" | "ddos" | "downloader" | "dropper" | "exploit-kit" | "keylogger" | "ransomware" | "remote-access-trojan" | "resource-exploitation" | "rogue-security-software" | "rootkit" | "screen-capture" | "spyware" | "trojan" | "unknown" | "virus" | "webshell" | "wiper" | "worm">;
+
+export type ProcessorArchitectureOv = OpenVocabulary<"alpha" | "arm" | "ia-64" | "mips" | "powerpc" | "sparc" | "x86" | "x86-64">;
+
+export type ImplementationLanguageOv = OpenVocabulary<"applescript" | "bash" | "c" | "c++" | "c#" | "go" | "java" | "javascript" | "lua" | "objective-c" | "perl" | "php" | "powershell" | "python" | "ruby" | "scala" | "swift" | "typescript" | "visual-basic" | "x86-32" | "x86-64">;
+
+export type MalwareCapabilityOv = OpenVocabulary<"accesses-remote-machines" |"anti-debugging" |"anti-disassembly" |"anti-emulation" |"anti-memory-forensics" |"anti-sandbox" |"anti-vm" |"captures-input-peripherals" |"captures-output-peripherals" |"captures-system-state-data" |"cleans-traces-of-infection" |"commits-fraud" |"communicates-with-c2" |"compromises-data-availability" |"compromises-data-integrity" |"compromises-system-availability" |"controls-local-machine" |"degrades-security-software" |"degrades-system-updates" |"determines-c2-server" |"emails-spam" |"escalates-privileges" |"evades-av" |"exfiltrates-data" |"fingerprints-host" |"hides-artifacts" |"hides-executing-code" |"infects-files" |"infects-remote-machines" |"installs-other-components" |"persists-after-system-reboot" |"prevents-artifact-access" |"prevents-artifact-deletion" |"probes-network-environment" |"self-modifies" |"steals-authentication-credentials" |"violates-system-operational-integrity">;
+
 //#endregion
 
 //#region 11 - Customizing STIX
